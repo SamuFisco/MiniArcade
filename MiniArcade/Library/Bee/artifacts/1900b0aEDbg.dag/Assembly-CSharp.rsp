@@ -388,6 +388,7 @@
 "Assets/LeanTween/Framework/LTDescr.cs"
 "Assets/LeanTween/Framework/LTDescrOptional.cs"
 "Assets/LeanTween/Framework/LTSeq.cs"
+"Assets/Scripts/ManagerGeneral.cs"
 -langversion:9.0
 /deterministic
 /optimize-
