@@ -4,7 +4,7 @@ using TMPro;
 
 public class ControladorMenu : MonoBehaviour
 {
-    [Header("Elementos UI")]
+    [Header("Elementos UI")] //Array Elementos UI
     public RectTransform panelMenu;  // El panel del menú inferior que se moverá
     public RectTransform panelMenuLateral;  // El panel del menú lateral que se moverá
     public Button botonAbrirMenu;     // Botón para abrir el menú (subir)
@@ -22,7 +22,7 @@ public class ControladorMenu : MonoBehaviour
     public Button botonEliminarObjeto; // Botón para eliminar el objeto seleccionado
     public Button botonMoverObjeto; // Botón para activar el modo mover
 
-    [Header("Prefabs")]
+    [Header("Prefabs")] //Array prefabs
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
@@ -33,6 +33,9 @@ public class ControladorMenu : MonoBehaviour
     public GameObject prefab8;
 
     public float duracionAnimacion = 0.5f;  // Duración de la animación
+    public float duracionAnimacionCreacion = 0.5f; // Duración de la animación al crear el objeto
+    public float duracionAnimacionEliminacion = 0.5f; // Duración de la animación al eliminar el objeto
+
 
     private GameObject objetoSeleccionado; // Referencia al objeto seleccionado
     private bool modoMoverActivo = false;  // Controla si el modo de mover está activo
@@ -48,7 +51,7 @@ public class ControladorMenu : MonoBehaviour
     private Vector2 posicionMenuLateralFinal = new Vector2(488, 38);  // Posición final del menú lateral (visible)
 
     private bool menuDentro = false;  // Controla si el menú lateral está en la posición visible
-
+    
     private void Start()
     {
         // Asegurarse de que el menú inferior empieza en la posición oculta
@@ -162,15 +165,25 @@ public class ControladorMenu : MonoBehaviour
     {
         if (prefab != null)
         {
-            Vector3 posicionInicial = new Vector3(0, 1, 0); // Cambiar si se requiere otra posición
+            Vector3 posicionInicial = new Vector3(0, 1, 0);
             GameObject nuevoObjeto = Instantiate(prefab, posicionInicial, Quaternion.identity);
             nuevoObjeto.tag = "seleccion";
             nuevoObjeto.name = "Objeto" + objetoId;
+
+            AnimarCreacion(nuevoObjeto);
             Debug.Log("Objeto creado: " + nuevoObjeto.name);
         }
         else
         {
             Debug.LogWarning("Prefab no asignado para el objeto " + objetoId);
+        }
+    }
+    public void AnimarCreacion(GameObject objeto)
+    {
+        if (objeto != null)
+        {
+            objeto.transform.localScale = Vector3.zero;
+            LeanTween.scale(objeto, Vector3.one, duracionAnimacionCreacion).setEase(LeanTweenType.easeOutBounce);
         }
     }
 
@@ -188,10 +201,21 @@ public class ControladorMenu : MonoBehaviour
     {
         if (objetoSeleccionado != null)
         {
-            Destroy(objetoSeleccionado);
+            AnimarEliminacion(objetoSeleccionado);  // Llamar a la animación de eliminación
             objetoSeleccionado = null;  // Limpiar la referencia
         }
     }
+
+    public void AnimarEliminacion(GameObject objeto)
+    {
+        if (objeto != null)
+        {
+            LeanTween.scale(objeto, Vector3.zero, duracionAnimacionEliminacion)
+                     .setEase(LeanTweenType.easeInBack) // Tipo de easing para suavizar la animación
+                     .setOnComplete(() => Destroy(objeto));  // Destruir el objeto al terminar la animación
+        }
+    }
+
 
     // Función para activar el modo de mover
     private void ActivarModoMover()

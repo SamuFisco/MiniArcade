@@ -403,6 +403,7 @@
 "Assets/LeanTween/Testing/TestingSceneSwitching.cs"
 "Assets/LeanTween/Testing/TestingSequencer.cs"
 "Assets/Scripts/ControladorMenu.cs"
+"Assets/Scripts/MoverConRaton.cs"
 "Assets/Scripts/PopUpSuperiorr.cs"
 -langversion:9.0
 /deterministic

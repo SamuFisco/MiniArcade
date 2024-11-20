@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9e538a73e6193b84987768fa9d8410a2, type: 3}
       propertyPath: m_Name
-      value: gambling-machine
+      value: prefab6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9e538a73e6193b84987768fa9d8410a2, type: 3}
       propertyPath: m_TagString
@@ -118,5 +118,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0

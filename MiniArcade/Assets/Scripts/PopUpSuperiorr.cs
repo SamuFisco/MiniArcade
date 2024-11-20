@@ -36,10 +36,10 @@ public class PopUpSuperior : MonoBehaviour
         popupEliminar.anchoredPosition = posicionOculta;
 
         // Asignar listeners a los botones de abrir
-        botonAbrirCrear.onClick.AddListener(() => MostrarPopup(popupCrear));
-        botonAbrirMover.onClick.AddListener(() => MostrarPopup(popupMover));
-        botonAbrirRotar.onClick.AddListener(() => MostrarPopup(popupRotar));
-        botonAbrirEliminar.onClick.AddListener(() => MostrarPopup(popupEliminar));
+        botonAbrirCrear.onClick.AddListener(() => MostrarPopupConAutoCerrar(popupCrear));
+        botonAbrirMover.onClick.AddListener(() => MostrarPopupConAutoCerrar(popupMover));
+        botonAbrirRotar.onClick.AddListener(() => MostrarPopupConAutoCerrar(popupRotar));
+        botonAbrirEliminar.onClick.AddListener(() => MostrarPopupConAutoCerrar(popupEliminar));
 
         // Asignar listeners a los botones de cerrar
         botonCerrarCrear.onClick.AddListener(() => OcultarPopup(popupCrear));
@@ -54,9 +54,23 @@ public class PopUpSuperior : MonoBehaviour
         LeanTween.moveY(popup, posicionVisible.y, duracionAnimacion).setEase(LeanTweenType.easeOutExpo);
     }
 
+    // Mostrar popup con cierre automático
+    private void MostrarPopupConAutoCerrar(RectTransform popup)
+    {
+        MostrarPopup(popup);
+        StartCoroutine(CerrarPopupDespuesDeTiempo(popup, 2f)); // 2 segundos
+    }
+
     // Ocultar popup con animación
     private void OcultarPopup(RectTransform popup)
     {
         LeanTween.moveY(popup, posicionOculta.y, duracionAnimacion).setEase(LeanTweenType.easeInExpo);
+    }
+
+    // Corutina para cerrar el popup después de un tiempo
+    private System.Collections.IEnumerator CerrarPopupDespuesDeTiempo(RectTransform popup, float tiempo)
+    {
+        yield return new WaitForSeconds(tiempo); // Esperar el tiempo especificado
+        OcultarPopup(popup); // Ocultar el popup
     }
 }
