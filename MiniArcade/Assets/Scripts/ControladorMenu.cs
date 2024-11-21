@@ -21,8 +21,10 @@ public class ControladorMenu : MonoBehaviour
     public Button botonRotarObjeto;  // Botón para rotar el objeto
     public Button botonEliminarObjeto; // Botón para eliminar el objeto seleccionado
     public Button botonMoverObjeto; // Botón para activar el modo mover
+    
 
     [Header("Prefabs")] //Array prefabs
+    public GameObject sombraObjeto; // Sombra del Objeto en escena
     public GameObject prefab1;
     public GameObject prefab2;
     public GameObject prefab3;
@@ -41,19 +43,25 @@ public class ControladorMenu : MonoBehaviour
     private bool modoMoverActivo = false;  // Controla si el modo de mover está activo
 
     // Posiciones del menú inferior
-    private Vector2 posicionMenuInferior = new Vector2(-3, -442);   // Posición inicial del menú (abajo)
-    private Vector2 posicionMenuSuperior = new Vector2(-3, -244);  // Posición final del menú (arriba)
+    private Vector2 posicionMenuInferior = new Vector2(-3, -340);   // Posición inicial del menú (abajo)
+    private Vector2 posicionMenuSuperior = new Vector2(-3, -242);  // Posición final del menú (arriba)
 
     private bool menuArriba = false;  // Controla si el menú inferior está en la posición superior
 
     // Posiciones del menú lateral
     private Vector2 posicionMenuLateralInicio = new Vector2(810, 38);   // Posición inicial del menú lateral (oculto)
-    private Vector2 posicionMenuLateralFinal = new Vector2(488, 38);  // Posición final del menú lateral (visible)
+    private Vector2 posicionMenuLateralFinal = new Vector2(321, 38);  // Posición final del menú lateral (visible)
 
     private bool menuDentro = false;  // Controla si el menú lateral está en la posición visible
+
+
     
+
     private void Start()
     {
+
+        
+        
         // Asegurarse de que el menú inferior empieza en la posición oculta
         panelMenu.anchoredPosition = posicionMenuInferior;
 
@@ -68,6 +76,7 @@ public class ControladorMenu : MonoBehaviour
         botonAnadirMenuLateral.gameObject.SetActive(true);
 
         // Agregar los listeners a los botones
+       
         botonRotarObjeto.onClick.AddListener(RotarObjeto);
         botonEliminarObjeto.onClick.AddListener(EliminarObjeto);
         botonMoverObjeto.onClick.AddListener(ActivarModoMover);
@@ -169,6 +178,7 @@ public class ControladorMenu : MonoBehaviour
             GameObject nuevoObjeto = Instantiate(prefab, posicionInicial, Quaternion.identity);
             nuevoObjeto.tag = "seleccion";
             nuevoObjeto.name = "Objeto" + objetoId;
+         
 
             AnimarCreacion(nuevoObjeto);
             Debug.Log("Objeto creado: " + nuevoObjeto.name);
@@ -177,7 +187,9 @@ public class ControladorMenu : MonoBehaviour
         {
             Debug.LogWarning("Prefab no asignado para el objeto " + objetoId);
         }
+
     }
+   
     public void AnimarCreacion(GameObject objeto)
     {
         if (objeto != null)

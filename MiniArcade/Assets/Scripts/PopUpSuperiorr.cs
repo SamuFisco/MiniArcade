@@ -24,8 +24,8 @@ public class PopUpSuperior : MonoBehaviour
     [Header("Animación")]
     public float duracionAnimacion = 0.5f; // Duración de la animación
 
-    private Vector2 posicionOculta = new Vector2(0, 600); // Posición fuera de la pantalla
-    private Vector2 posicionVisible = new Vector2(1, 300); // Posición visible
+    private Vector2 posicionOculta = new Vector2(-140, 346); // Posición fuera de la pantalla
+    private Vector2 posicionVisible = new Vector2(-140, 178); // Posición visible
 
     private void Start()
     {
