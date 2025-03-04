@@ -402,7 +402,10 @@
 "Assets/LeanTween/Testing/TestingRotate.cs"
 "Assets/LeanTween/Testing/TestingSceneSwitching.cs"
 "Assets/LeanTween/Testing/TestingSequencer.cs"
+"Assets/Scripts/AnimacionCreacionObjeto.cs"
 "Assets/Scripts/ControladorMenu.cs"
+"Assets/Scripts/EscaladoObjeto.cs"
+"Assets/Scripts/EscaladoObjeto2.cs"
 "Assets/Scripts/MoverConRaton.cs"
 "Assets/Scripts/PopUpSuperiorr.cs"
 -langversion:9.0
